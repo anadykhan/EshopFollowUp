@@ -142,6 +142,20 @@ const Signup = () => {
                     <RxAvatar className="h-8 w-8" />
                   )}
                 </span>
+                <label
+                  htmlFor="file-input"
+                  className="ml-5 items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    type="file"
+                    name="avatar"
+                    id="file-input"
+                    accept=".jpg,.jpeg,.png"
+                    onChange={handleFileInputChange}
+                    className="sr-only"
+                  />
+                </label>
               </div>
             </div>
 
@@ -154,9 +168,9 @@ const Signup = () => {
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
-              <h4>Not have any account?</h4>
-              <Link to="/sign-up" className="text-blue-600 pl-2">
-                Sign Up
+              <h4>Already have an account?</h4>
+              <Link to="/login" className="text-blue-600 pl-2">
+                Sign In
               </Link>
             </div>
           </form>
