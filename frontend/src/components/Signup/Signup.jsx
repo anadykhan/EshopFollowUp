@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/style";
 import { RxAvatar } from "react-icons/rx";
+import axios from "axios"
+import { server } from "../../server";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -10,14 +12,35 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
-
-  const handleSubmit = (e) => {
-    console.log("Submit working");
-  };
+  const navigate = useNavigate()
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setAvatar(file);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("Submit working");
+
+    const config = {headers: {'Content-Type': 'multipart/form-data'}}
+    const newForm = new FormData()
+
+    newForm.append('file', avatar)
+    newForm.append('name', name)
+    newForm.append('email', email)
+    newForm.append('password', password)
+
+    axios.post(`${server}/user/create-user`, newForm, config)
+    .then((res) => {
+      console.log(res.data)
+      if(res.data.success === true) {
+        navigate('/')
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   };
 
   return (
@@ -29,7 +52,7 @@ const Signup = () => {
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -44,7 +67,7 @@ const Signup = () => {
                   autoComplete="name"
                   required
                   value={name}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
