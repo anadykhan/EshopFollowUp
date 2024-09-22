@@ -3,10 +3,13 @@ const path = require('path')
 const User = require('../models/user')
 const { upload } = require('../multer')
 const ErrorHandler = require('../utils/ErrorHandler')
+const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 const router = express.Router()
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const sendMail = require('../utils/sendMail')
+const sendToken = require('../utils/jwtToken')
+const user = require('../models/user')
 
 router.post('/create-user', upload.single('file'), async (req, res, next) => {
     try {
@@ -21,9 +24,6 @@ router.post('/create-user', upload.single('file'), async (req, res, next) => {
                 if (err) {
                     console.log(err)
                     res.status(500).json({ message: 'Error deleting file' })
-                }
-                else {
-                    res.json({ message: 'File deleted' })
                 }
             })
             return next(new ErrorHandler('User already exists', 400))
@@ -78,6 +78,42 @@ const createActivationToken = (user) => {
 }
 
 //Activate user
+router.post('/activation', catchAsyncErrors(async (req, res, next) => {
+    try {
+        const { activationToken } = req.body;
+
+        if (!activationToken) {
+            return next(new ErrorHandler('No activation token', 400));
+        }
+
+        const newUser = jwt.verify(activationToken, process.env.ACTIVATION_SECRET);
+
+        if (!newUser) {
+            return next(new ErrorHandler('Invalid or expired token', 400));
+        }
+
+        const { name, email, password, avatar } = newUser;
+
+        const matchedUser = await User.findOne({ email });
+
+        if (matchedUser) {
+            return next(new ErrorHandler('User already exists', 400));
+        }
+
+        // Await the User.create operation to ensure it completes before proceeding
+        const createdUser = await User.create({
+            name,
+            email,
+            avatar,
+            password
+        });
+
+        sendToken(createdUser, 201, res);
+
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+}));
 
 
 module.exports = router
