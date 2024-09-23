@@ -5,6 +5,7 @@ import styles from "../../styles/style";
 import { RxAvatar } from "react-icons/rx";
 import axios from "axios"
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -31,14 +32,16 @@ const Signup = () => {
     newForm.append('password', password)
 
     try {
-      const response = await axios.post(`${server}/user/create-user`, newForm, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(`${server}/user/create-user`, newForm, config);
       console.log(response.data);
+      toast.success(response.data.message)
+      setName('')
+      setEmail('')
+      setPassword('')
+      setAvatar()
     } catch (error) {
       console.error(error);
+      toast.error(error.response.data.message)
     }
   };
 

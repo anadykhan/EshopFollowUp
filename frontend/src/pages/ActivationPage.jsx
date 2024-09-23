@@ -20,6 +20,7 @@ const ActivationPage = () => {
                     })
                     .catch((err) => {
                         setError(true);
+                        console.log(err)
                     });
             };
             sendRequest();
