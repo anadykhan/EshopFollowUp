@@ -116,39 +116,39 @@ router.post('/activation', catchAsyncErrors(async (req, res, next) => {
 }));
 
 //Login user
-router.post('/login-user', catchAsyncErrors(async(req, res, next) => {
-    try{
-        const {email, password} = req.body
+router.post('/login-user', catchAsyncErrors(async (req, res, next) => {
+    try {
+        const { email, password } = req.body
 
-        if(!email || !password) {
+        if (!email || !password) {
             return next(new ErrorHandler('Please provide the necessary information', 400))
         }
 
-        const user = await User.findOne({email}).select('+password')
+        const user = await User.findOne({ email }).select('+password')
 
-        if(!user) {
+        if (!user) {
             return next(new ErrorHandler('User doesnot exists', 500))
         }
 
         const isPasswordValid = await user.comparePassword(password)
 
-        if(!isPasswordValid) {
+        if (!isPasswordValid) {
             return next(new ErrorHandler('Please provide the correct information', 400))
         }
 
         sendToken(user, 201, res)
-        
-    } catch(error){
+
+    } catch (error) {
         return next(new ErrorHandler(error.message, 500))
     }
 }))
 
 //Load user
 router.get('/get-user', isAuthenticated, catchAsyncErrors(async (req, res, next) => {
-    try{
+    try {
         const user = await User.findById(req.user.id)
 
-        if(!user) {
+        if (!user) {
             return next(new ErrorHandler('User doesnot exists', 500))
         }
 
@@ -156,8 +156,8 @@ router.get('/get-user', isAuthenticated, catchAsyncErrors(async (req, res, next)
             success: true,
             user
         })
-    }catch(error) {
-        return next(new ErrorHandler(error.message, 500)) 
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500))
     }
 }))
 

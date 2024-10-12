@@ -6,20 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { server } from "./server.js";
 import axios from "axios";
 import { useEffect } from "react";
+import { loadUser } from "./redux/actions/user.js"
+import Store from "./redux/store.js"
 
 const App = () => {
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await axios.get(`${server}/user/get-user`, {withCredentials: true});
-        console.log(res.data);
-        toast.success(res.data)
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-    }
-
-    fetchUser();
+    Store.dispatch(loadUser())
   }, [])
 
   return (

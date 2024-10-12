@@ -113,7 +113,7 @@ const Login = () => {
               <div className="text-sm">
                 <a
                   href=".forgot-password"
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className="font-medium text-orange-600 hover:text-orange-500"
                 >
                   Forgot your password?
                 </a>
@@ -122,14 +122,14 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full h-[40px] flex justify-center py-2 border border-transparent text-sm font-medium text-white rounded-md bg-blue-600 hover:bg-blue-700"
+                className="group relative w-full h-[40px] flex justify-center py-2 border border-transparent text-sm font-medium text-white rounded-md bg-orange-600 hover:bg-orange-700"
               >
                 Submit
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Not have any account?</h4>
-              <Link to="/sign-up" className="text-blue-600 pl-2">
+              <Link to="/sign-up" className="text-orange-600 pl-2">
                 Sign Up
               </Link>
             </div>

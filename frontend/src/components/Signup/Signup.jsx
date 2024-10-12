@@ -70,7 +70,7 @@ const Signup = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@ const Signup = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                 />
               </div>
             </div>
@@ -108,7 +108,7 @@ const Signup = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                 />
                 {visible ? (
                   <AiOutlineEyeInvisible
@@ -131,7 +131,7 @@ const Signup = () => {
                   type="checkbox"
                   name="remember-me"
                   id="remember-me"
-                  className="h4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
                 />
                 <label
                   htmlFor="remember-me"
@@ -143,7 +143,7 @@ const Signup = () => {
               <div className="text-sm">
                 <a
                   href=".forgot-password"
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className="font-medium text-orange-600 hover:text-orange-500"
                 >
                   Forgot your password?
                 </a>
@@ -187,14 +187,14 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full h-[40px] flex justify-center py-2 border border-transparent text-sm font-medium text-white rounded-md bg-blue-600 hover:bg-blue-700"
+                className="group relative w-full h-[40px] flex justify-center py-2 border border-transparent text-sm font-medium text-white rounded-md bg-orange-600 hover:bg-orange-700"
               >
                 Submit
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Already have an account?</h4>
-              <Link to="/login" className="text-blue-600 pl-2">
+              <Link to="/login" className="text-orange-600 pl-2">
                 Sign In
               </Link>
             </div>
