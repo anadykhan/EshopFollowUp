@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { LoginPage, SignupPage, ActivationPage } from './Routes.js'
+import { LoginPage, SignupPage, ActivationPage, HomePage } from './Routes.js'
 import './App.css'
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { server } from "./server.js";
-import axios from "axios";
 import { useEffect } from "react";
 import { loadUser } from "./redux/actions/user.js"
 import Store from "./redux/store.js"
@@ -18,6 +16,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<HomePage/>}></Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
           <Route path="/activation/:activation_token" element={<ActivationPage />} />
