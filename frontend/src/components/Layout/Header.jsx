@@ -2,12 +2,18 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/style";
 import { useState } from "react";
 import { categoriesData, productData } from "../../static/data";
-import { AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineHeart,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import DropDown from "./DropDown";
+import Navbar from "./Navbar";
 
-const Header = () => {
+const Header = ({ activeHeading }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
@@ -36,6 +42,7 @@ const Header = () => {
 
   return (
     <div>
+      {/*Topbar Background*/}
       <div className={styles.section}>
         <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div>
@@ -90,12 +97,17 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {/*Navbar Background*/}
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
         } transition hidden 800px:flex items-center justify-between w-full bg-[#050D2E] h-[70px]`}
       >
-        <div className={`${styles.section} relative ${styles.noramlFlex}`}>
+        {/*Content section*/}
+        <div
+          className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
+        >
+          {/*Categories button*/}
           <div>
             <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
@@ -115,6 +127,42 @@ const Header = () => {
                   setDropDown={setDropDown}
                 />
               ) : null}
+            </div>
+          </div>
+          {/*Navbar items*/}
+          <div>
+            <Navbar active={activeHeading}></Navbar>
+          </div>
+          {/*Icons list*/}
+          <div className="flex">
+            {/*Heart icon*/}
+            <div className={`${styles.noramlFlex}`}>
+              <div className="relative cursor-pointer mr-[15px]">
+                <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
+                <span className="absolute right-0 top-0 rounded-full bg-orange-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  0
+                </span>
+              </div>
+            </div>
+            {/*Cart icon*/}
+            <div className={`${styles.noramlFlex}`}>
+              <div className="relative cursor-pointer mr-[15px]">
+                <AiOutlineShoppingCart
+                  size={30}
+                  color="rgb(255 255 255 / 83%)"
+                />
+                <span className="absolute right-0 top-0 rounded-full bg-orange-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                  0
+                </span>
+              </div>
+            </div>
+            {/*Cg profile icon*/}
+            <div className={`${styles.noramlFlex}`}>
+              <div className="relative cursor-pointer mr-[15px]">
+                <Link to='/login'>
+                  <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
