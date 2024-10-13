@@ -1,11 +1,13 @@
 import Header from '../components/Layout/Header.jsx'
 import Hero from '../components/Root/Hero/Hero'
+import Categories from '../components/Root/Categories/Categories'
 
 const HomePage = () => {
   return (
     <div>
           <Header activeHeading={1}></Header>
           <Hero></Hero>
+          <Categories></Categories>
     </div>
   )
 }
