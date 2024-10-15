@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/style";
+import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard";
 import {
   AiFillHeart,
   AiFillStar,
@@ -20,6 +21,7 @@ const ProductCard = ({ data }) => {
   return (
     <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
       <div className="flex justify-end"></div>
+      {/*Product image*/}
       <Link to={`/product/${newProductName}`}>
         <img
           src={data.image_Url[0].url}
@@ -27,13 +29,16 @@ const ProductCard = ({ data }) => {
           className="w-full h-[170px] object-contain"
         />
       </Link>
+      {/*Seller/shop name*/}
       <Link to="/">
         <h5 className={`${styles.shop_name}`}>{data.shop.name}</h5>
       </Link>
       <Link to={`/`}>
+        {/*Card name*/}
         <h4 className="pb-3 font-[500]">
           {data.name.length > 40 ? data.name.slice(0, 40) + "..." : data.name}
         </h4>
+        {/*Stars icons*/}
         <div className="flex">
           <AiFillStar
             className="mr-2 cursor-pointer"
@@ -61,6 +66,7 @@ const ProductCard = ({ data }) => {
             size={20}
           />
         </div>
+        {/*Price and items sold text*/}
         <div className="py-2 flex items-center justify-between">
           <div className="flex">
             <h5 className={`${styles.productDiscountPrice}`}>
@@ -75,6 +81,7 @@ const ProductCard = ({ data }) => {
           </span>
         </div>
       </Link>
+      {/*Card right icons*/}
       <div>
         {click ? (
           <AiFillHeart
@@ -107,6 +114,8 @@ const ProductCard = ({ data }) => {
           color="#444"
           title="Add to cart"
         />
+
+        {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
       </div>
     </div>
   );
